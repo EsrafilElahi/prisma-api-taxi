@@ -2,10 +2,10 @@ const prisma = require("./prisma");
 
 
 const createPassenger = async () => {
-  const article = await prisma.user.create({
+  const passenger = await prisma.user.create({
     data: {}
   });
-  return article;
+  return passenger;
 }
 
 module.exports = createPassenger
