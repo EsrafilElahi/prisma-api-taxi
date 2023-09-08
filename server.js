@@ -3,10 +3,7 @@ const path = require("path");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieparser = require("cookie-parser");
-const { PrismaClient } = require('@prisma/client');
-
-// Create an instance of the Prisma Client
-const prisma = new PrismaClient();
+const prisma = require("./prisma");
 
 
 dotenv.config();

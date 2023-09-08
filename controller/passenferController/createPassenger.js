@@ -1,4 +1,4 @@
-import { prisma } from "@prisma";
+const prisma = require("./prisma");
 
 
 const createPassenger = async () => {
