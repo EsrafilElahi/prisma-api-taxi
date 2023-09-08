@@ -2,10 +2,10 @@ const prisma = require("./prisma");
 
 
 const createDriver = async () => {
-  const article = await prisma.user.create({
+  const driver = await prisma.user.create({
     data: {},
   });
-  return article;
+  return driver;
 }
 
 module.exports = createDriver

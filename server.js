@@ -4,6 +4,9 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieparser = require("cookie-parser");
 const prisma = require("./prisma");
+const driverRoute = require("./routes/driver");
+const passengerRoute = require("./routes/passenger");
+const tripRoute = require("./routes/trip");
 
 
 dotenv.config();
@@ -25,6 +28,10 @@ app.use(cors());
 app.get("/", async (req, res) => {
   res.json({ msg: "Home Page" });
 });
+app.get("/api/passenger", passengerRoute);
+app.get("/api/driver", driverRoute);
+app.get("/api/trip", tripRoute);
+
 
 // 404 page
 app.get("*", (req, res) => {
