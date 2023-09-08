@@ -1,11 +1,11 @@
 const { Router } = require("express");
-const driverController = require("../controller/driverController/index");
+const passengerController = require("../controller/passenferController/index");
 
 const router = Router();
 
 
-router.get("/", driverController.getDrivers);
-router.get("/:driverId", driverController.getDriver);
-router.post("/", driverController.createDriver);
+router.get("/", passengerController.getPassenger);
+router.get("/:passengerId", passengerController.getPassengers);
+router.post("/", passengerController.createPassenger);
 
 module.exports = router;
