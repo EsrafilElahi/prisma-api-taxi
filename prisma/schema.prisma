@@ -10,9 +10,69 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+//* =================== models ===================
+
+model Passenger {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  role      Role     @default(PASSENGER)
+  profile   Profile? @relation("PassengerProfile") // 1 to 1
+  trips     Trip[] // 1 to many
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([email])
+  @@index([name, email, id], name: "allfieldsindex")
+}
+
+model Driver {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  role      Role     @default(DRIVER)
+  profile   Profile? @relation("DriverProfile") // 1 to 1
+  trips     Trip[] // 1 to many
+  vehicle   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([email])
+  @@index([name, email, id], name: "allFieldsIndex")
+}
+
+model Profile {
   id       Int    @id @default(autoincrement())
-  name     String
-  email    String
-  password String
+  location String
+  bio      String
+
+  // 1 to 1 passenger, driver
+  passenger   Passenger? @relation("PassengerProfile", fields: [passengerId], references: [id])
+  driver      Driver?    @relation("DriverProfile", fields: [driverId], references: [id])
+  passengerId Int        @unique
+  driverId    Int        @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Trip {
+  id          Int       @id @default(autoincrement())
+  passenger   Passenger @relation(fields: [passengerId], references: [id])
+  driver      Driver    @relation(fields: [driverId], references: [id])
+  passengerId Int
+  driverId    Int
+
+  startTime DateTime
+  endTime   DateTime
+  price     Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  PASSENGER
+  DRIVER
+  ADMIN
+  SUPPORT
 }
