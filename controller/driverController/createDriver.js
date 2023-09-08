@@ -1,8 +1,8 @@
-const prisma = require("./prisma");
+const prisma = require("../../prisma");
 
 
-const createDriver = async () => {
-  const driver = await prisma.user.create({
+const createDriver = async (req, res, next) => {
+  const driver = await prisma.driver.create({
     data: {},
   });
   return driver;

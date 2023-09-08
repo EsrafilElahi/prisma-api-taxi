@@ -1,8 +1,8 @@
-const prisma = require("./prisma");
+const prisma = require("../../prisma");
 
 
 const createTrip = async () => {
-  const trip = await prisma.user.create({
+  const trip = await prisma.trip.create({
     data: {}
   });
   return trip;

@@ -1,13 +1,13 @@
-const prisma = require("./prisma");
+const prisma = require("../../prisma");
 
 
 const getDriver = async () => {
-  const driver = await prisma.user.findMany();
+  const driver = await prisma.driver.findFirst({});
   return driver;
 }
 
 const getDrivers = async () => {
-  const drivers = await prisma.user.findMany();
+  const drivers = await prisma.driver.findFirst({});
   return drivers;
 }
 

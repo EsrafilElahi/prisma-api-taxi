@@ -28,9 +28,9 @@ app.use(cors());
 app.get("/", async (req, res) => {
   res.json({ msg: "Home Page" });
 });
-app.get("/api/passenger", passengerRoute);
+// app.get("/api/passenger", passengerRoute);
 app.get("/api/driver", driverRoute);
-app.get("/api/trip", tripRoute);
+// app.get("/api/trip", tripRoute);
 
 
 // 404 page

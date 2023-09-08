@@ -1,13 +1,13 @@
-const prisma = require("./prisma");
+const prisma = require("../../prisma");
 
 
 const getTrip = async () => {
-  const trip = await prisma.user.findMany();
+  const trip = await prisma.trip.findMany({});
   return trip;
 }
 
 const getTrips = async () => {
-  const trips = await prisma.user.findMany();
+  const trips = await prisma.trip.findMany({});
   return trips;
 }
 
