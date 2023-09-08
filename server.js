@@ -3,6 +3,10 @@ const path = require("path");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const cookieparser = require("cookie-parser");
+const { PrismaClient } = require('@prisma/client');
+
+// Create an instance of the Prisma Client
+const prisma = new PrismaClient();
 
 
 dotenv.config();
@@ -30,7 +34,22 @@ app.get("*", (req, res) => {
   res.send("404 not found page");
 });
 
+async function main() {
+  try {
+    // Use the Prisma Client to interact with your database
+    const user = await prisma.user.findMany({})
+
+    console.log('user:', user);
+
+    // You can perform various database operations here
+  } catch (error) {
+    console.error('Error:', error);
+  }
+}
+
+
 // start app
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
+  main();
 });
