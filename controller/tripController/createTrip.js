@@ -1,7 +1,7 @@
 import { prisma } from "@prisma";
 
 
-const createPassenger = async () => {
+const createTrip = async () => {
   const article = await prisma.user.create({
     data: {
       ...info,
@@ -18,4 +18,4 @@ const createPassenger = async () => {
   return article;
 }
 
-module.exports = createPassenger
+module.exports = createTrip

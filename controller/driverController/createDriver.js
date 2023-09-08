@@ -1,7 +1,7 @@
 import { prisma } from "@prisma";
 
 
-export default async function articleCreatePrisma() {
+const createDriver = async () => {
   const article = await prisma.user.create({
     data: {
       ...info,
@@ -17,3 +17,5 @@ export default async function articleCreatePrisma() {
   });
   return article;
 }
+
+module.exports = createDriver
