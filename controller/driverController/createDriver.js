@@ -9,3 +9,6 @@ const createDriver = async (req, res, next) => {
 }
 
 module.exports = createDriver
+
+
+https://github.com/SeuRonao/realworld-express-prisma/blob/main/src/utils/db/article/articleListPrisma.ts
