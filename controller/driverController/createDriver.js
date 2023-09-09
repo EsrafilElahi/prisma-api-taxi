@@ -26,7 +26,7 @@ const createDriver = async (req, res, next) => {
       },
     });
 
-    return res.json({ message: "user created successfully", status: 201, data: driver })
+    return res.json({ message: "user created successfully", status: 201, driver: driver })
   } catch (error) {
     return res.json({ error: 'server error', status: 500 })
   }
