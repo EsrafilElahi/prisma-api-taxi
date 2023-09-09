@@ -11,9 +11,6 @@ const getDriver = async (req, res, next) => {
       }
     });
 
-    console.log('driver :', driver)
-
-
     // check driver exist
     if (!driver) {
       return res.json({ message: "driver not found", status: 404 })

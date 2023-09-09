@@ -3,9 +3,23 @@ const prisma = require("../../prisma");
 
 const getPassenger = async (req, res, next) => {
   try {
-    
+    const passengerId = req.params.passengerId;
+
+    const passenger = await prisma.passenger.findUnique({
+      where: {
+        id: Number(passengerId)
+      }
+    })
+
+    // check passenger exists
+    if (!passenger) {
+      return res.json({ message: "Passenger not found", status: 404 })
+    }
+
+    return res.json({ message: "passenger successfully found", status: 200, passenger: passenger })
+
   } catch (error) {
-    
+    return res.json({ message: "server error", status: 500, error: error })
   }
 }
 
