@@ -28,9 +28,10 @@ app.use(cors());
 app.get("/", async (req, res) => {
   res.json({ msg: "Home Page" });
 });
+
 app.use("/api/passengers", passengerRoute);
 app.use("/api/drivers", driverRoute);
-// app.use("/api/trips", tripRoute);
+app.use("/api/trips", tripRoute);
 
 
 // 404 page
@@ -38,22 +39,8 @@ app.get("*", (req, res) => {
   res.send("404 not found page");
 });
 
-async function main() {
-  try {
-    // Use the Prisma Client to interact with your database
-    const user = await prisma.user.findMany({})
-
-    console.log('user:', user);
-
-    // You can perform various database operations here
-  } catch (error) {
-    console.error('Error:', error);
-  }
-}
-
 
 // start app
 app.listen(port, () => {
   console.log(`server is running on port ${port}`);
-  main();
 });

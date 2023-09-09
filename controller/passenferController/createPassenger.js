@@ -1,7 +1,7 @@
 const prisma = require("../../prisma");
 
 
-const createPassenger = async (res, req, next) => {
+const createPassenger = async (req, res, next) => {
   try {
     // check passenger exists
     const passenger = await prisma.passenger.findUnique({
