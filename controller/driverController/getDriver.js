@@ -7,8 +7,10 @@ const getDriver = async () => {
 }
 
 const getDrivers = async () => {
-  const drivers = await prisma.driver.findFirst({});
-  return drivers;
+  const drivers = await prisma.driver.findMany({});
+  
+  // driver exist
+  
 }
 
 module.exports = { getDriver, getDrivers }
