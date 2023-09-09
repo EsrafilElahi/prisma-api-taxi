@@ -2,8 +2,27 @@ const prisma = require("../../prisma");
 
 
 const getDriver = async (req, res, next) => {
-  const driver = await prisma.driver.findFirst({});
-  return driver;
+  try {
+    const driverId = req.params.driverId;
+
+    const driver = await prisma.driver.findUnique({
+      where: {
+        id: Number(driverId)
+      }
+    });
+
+    console.log('driver :', driver)
+
+
+    // driver exist
+    if (!driver) {
+      return res.json({ message: "driver not found", status: 404 })
+    }
+
+    return res.json({ message: "driver found successfully", status: 200, driver: driver })
+  } catch (error) {
+    return res.json({ message: "server error", status: 500, error: error })
+  }
 }
 
 const getDrivers = async (req, res, next) => {
@@ -26,6 +45,7 @@ const getDrivers = async (req, res, next) => {
     }
 
     return res.json({ message: "drivers", status: 200, drivers: drivers })
+
   } catch (error) {
     return res.json({ message: "server error", status: 500, error: error })
   }
