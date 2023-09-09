@@ -14,7 +14,7 @@ const getDriver = async (req, res, next) => {
     console.log('driver :', driver)
 
 
-    // driver exist
+    // check driver exist
     if (!driver) {
       return res.json({ message: "driver not found", status: 404 })
     }
@@ -39,7 +39,7 @@ const getDrivers = async (req, res, next) => {
       }
     });
 
-    // driver exist
+    // check driver exist
     if (!drivers) {
       return res.json({ message: "drivers not found", status: 404 })
     }
