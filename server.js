@@ -6,6 +6,7 @@ const cookieparser = require("cookie-parser");
 const prisma = require("./prisma");
 const driverRoute = require("./routes/driver");
 const passengerRoute = require("./routes/passenger");
+const profileRoute = require("./routes/profile");
 const tripRoute = require("./routes/trip");
 
 
@@ -31,6 +32,7 @@ app.get("/", async (req, res) => {
 
 app.use("/api/passengers", passengerRoute);
 app.use("/api/drivers", driverRoute);
+app.use("/api/profile", profileRoute);
 app.use("/api/trips", tripRoute);
 
 
