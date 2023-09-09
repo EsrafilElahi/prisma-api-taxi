@@ -7,14 +7,18 @@ const getDriver = async () => {
 }
 
 const getDrivers = async () => {
-  const drivers = await prisma.driver.findMany({});
-
-  // driver exist
-  if (!drivers) {
-    return res.json({ message: "drivers not found", status: 404 })
+  try {
+    const drivers = await prisma.driver.findMany({});
+  
+    // driver exist
+    if (!drivers) {
+      return res.json({ message: "drivers not found", status: 404 })
+    }
+  
+    return res.json({ message: "drivers", status: 200, drivers: drivers })
+  } catch (error) {
+    return res.json({ message: "server error", status: 500, error: error })
   }
-
-  return res.json({ message: "drivers", status: 200, drivers: drivers })
 
 }
 
