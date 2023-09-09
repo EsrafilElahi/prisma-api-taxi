@@ -28,7 +28,7 @@ app.use(cors());
 app.get("/", async (req, res) => {
   res.json({ msg: "Home Page" });
 });
-// app.use("/api/passengers", passengerRoute);
+app.use("/api/passengers", passengerRoute);
 app.use("/api/drivers", driverRoute);
 // app.use("/api/trips", tripRoute);
 

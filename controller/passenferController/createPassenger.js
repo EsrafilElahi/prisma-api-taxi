@@ -3,13 +3,13 @@ const prisma = require("../../prisma");
 
 const createPassenger = async (res, req, next) => {
   try {
+    // check passenger exists
     const passenger = await prisma.passenger.findUnique({
       where: {
         email: req.body.email
       }
     })
 
-    // passenger exists
     if (passenger) {
       return res.json({ message: "user already exists", status: 409 })
     }
@@ -24,7 +24,7 @@ const createPassenger = async (res, req, next) => {
     return res.json({ message: "user successfully created", status: 201, passenger: newPassenger })
 
   } catch (error) {
-    return res.json({ message: "server error", status: 500, error: error })
+    return res.json({ error: 'server error', status: 500, error: error })
   }
 }
 

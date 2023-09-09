@@ -12,8 +12,6 @@ const createDriver = async (req, res, next) => {
       }
     })
 
-    console.log('driver exists :', driver)
-
     if (driver) {
       return res.json({ message: "driver already exists", status: 409 })
     }
