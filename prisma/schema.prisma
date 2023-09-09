@@ -49,8 +49,8 @@ model Profile {
   // 1 to 1 passenger, driver
   passenger   Passenger? @relation("PassengerProfile", fields: [passengerId], references: [id])
   driver      Driver?    @relation("DriverProfile", fields: [driverId], references: [id])
-  passengerId Int        @unique
-  driverId    Int        @unique
+  passengerId Int?        @unique
+  driverId    Int?        @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

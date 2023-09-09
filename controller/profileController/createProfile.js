@@ -15,7 +15,7 @@ const createProfile = async (req, res, next) => {
     }
 
     let passengerProfile;
-    let driverProfile;
+    // let driverProfile;
 
     if (req.body.passengerId) {
       passengerProfile = await prisma.passenger.findUnique({
@@ -31,21 +31,22 @@ const createProfile = async (req, res, next) => {
       })
     }
 
-    if (req.body.driverId) {
-      driverProfile = await prisma.driver.findUnique({
-        where: {
-          id: req.body.passengerId
-        },
-        select: {
-          id: true,
-          name: true,
-          email: true,
-          role: true,
-        }
-      })
-    }
+    // if (req.body.driverId) {
+    //   driverProfile = await prisma.driver.findUnique({
+    //     where: {
+    //       id: req.body.passengerId
+    //     },
+    //     select: {
+    //       id: true,
+    //       name: true,
+    //       email: true,
+    //       role: true,
+    //     }
+    //   })
+    // }
 
 
+    console.log('profile :', profile)
     console.log('passengerProfile :', passengerProfile)
     // console.log('driverProfile :', driverProfile)
 
@@ -53,13 +54,7 @@ const createProfile = async (req, res, next) => {
       data: {
         location: req.body.location,
         bio: req.body.bio,
-        passenger: {
-          create: {
-            name: "passengerProfile.name",
-            email: "passengerProfile.email",
-          }
-        },
-        passengerId: passengerProfile.id,
+        passengerId: req.body.passengerId,
       }
     })
 
