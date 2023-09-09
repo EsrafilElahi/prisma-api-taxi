@@ -6,19 +6,19 @@ const createDriver = async (req, res, next) => {
     console.log(req.body);
 
     // check driver exist
-    const driverExist = await prisma.driver.findUnique({
+    const driver = await prisma.driver.findUnique({
       where: {
         email: req.body.email
       }
     })
 
-    console.log('driver exists :', driverExist)
+    console.log('driver exists :', driver)
 
-    if (driverExist) {
+    if (driver) {
       return res.json({ message: "driver already exists", status: 409 })
     }
 
-    const driver = await prisma.driver.create({
+    const newDriver = await prisma.driver.create({
       data: {
         name: req.body.name,
         email: req.body.email,
@@ -26,7 +26,7 @@ const createDriver = async (req, res, next) => {
       },
     });
 
-    return res.json({ message: "user created successfully", status: 201, driver: driver })
+    return res.json({ message: "user created successfully", status: 201, driver: newDriver })
   } catch (error) {
     return res.json({ error: 'server error', status: 500, error: error })
   }
