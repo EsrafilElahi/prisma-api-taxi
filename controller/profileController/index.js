@@ -1,4 +1,4 @@
 const createProfile = require("./createProfile");
-const { getProfile } = require("./getProfile");
+const { getPassengerProfile, getDriverProfile } = require("./getProfile");
 
-module.exports = { createProfile, getProfile }
+module.exports = { createProfile, getPassengerProfile, getDriverProfile }
