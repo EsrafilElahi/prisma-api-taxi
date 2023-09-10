@@ -16,6 +16,9 @@ const updatePassengerProfile = async (req, res, next) => {
       }
     });
 
+    console.log('passengerId :', passengerId)
+    console.log('passengerHasProfile :', passengerHasProfile)
+
     if (!passengerHasProfile) {
       return res.json({ message: "this passenger has not profile", profile: passengerHasProfile, status: 404 })
     }
@@ -27,11 +30,16 @@ const updatePassengerProfile = async (req, res, next) => {
       }
     })
 
+    console.log('passengerExist :', passengerExist)
+
     if (!passengerExist) {
       return res.json({ message: "passenger doesn't exist", status: 404 })
     }
 
     const newProfile = await prisma.profile.update({
+      where: {
+        passengerId: Number(passengerId)
+      },
       data: {
         ...req.body
       }
@@ -77,6 +85,9 @@ const updateDriverProfile = async (req, res, next) => {
 
 
     const newProfile = await prisma.profile.update({
+      where: {
+        driverId: Number(driverId)
+      },
       data: {
         ...req.body
       }
