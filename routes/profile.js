@@ -9,6 +9,7 @@ router.get("/driver/:driverId", profileController.getDriverProfile);
 router.post("/", profileController.createProfile);
 router.put("/passenger/:passengerId", profileController.updatePassengerProfile);
 router.put("/driver/:driverId", profileController.updateDriverProfile);
+router.delete("/:profileId", profileController.deleteProfile);
 
 
 module.exports = router;
