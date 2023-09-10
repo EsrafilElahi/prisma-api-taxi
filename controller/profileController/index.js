@@ -1,5 +1,5 @@
 const createProfile = require("./createProfile");
 const { getPassengerProfile, getDriverProfile } = require("./getProfile");
-const updateProfile = require("./updateProfile");
+const { updateDriverProfile, updatePassengerProfile } = require("./updateProfile");
 
-module.exports = { createProfile, getPassengerProfile, getDriverProfile, updateProfile }
+module.exports = { createProfile, getPassengerProfile, getDriverProfile, updatePassengerProfile, updateDriverProfile }
