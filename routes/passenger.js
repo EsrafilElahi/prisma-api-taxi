@@ -7,5 +7,6 @@ const router = Router();
 router.get("/", passengerController.getPassengers);
 router.get("/:passengerId", passengerController.getPassenger);
 router.post("/", passengerController.createPassenger);
+router.delete("/:passengerId", passengerController.deletePassenger);
 
 module.exports = router;
