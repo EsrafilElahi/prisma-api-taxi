@@ -1,93 +1,95 @@
 const prisma = require("../../prisma");
 
 
-const updateProfile = async (req, res, next) => {
+const updatePassengerProfile = async (req, res, next) => {
   try {
 
-    if (req.body.passengerId) {
+    const passengerId = req.params.passengerId;
 
-      // check passenger has a profile or not
-      const passengerHasProfile = await prisma.passenger.findUnique({
-        where: {
-          id: req.body.passengerId,
-          profile: {
-            passengerId: req.body.passengerId
-          }
+    // check passenger has a profile or not
+    const passengerHasProfile = await prisma.passenger.findUnique({
+      where: {
+        id: Number(passengerId),
+        profile: {
+          passengerId: Number(passengerId)
         }
-      });
-
-      if (passengerHasProfile) {
-        return res.json({ message: "this passenger has a profile", profile: passengerHasProfile, status: 409 })
       }
+    });
 
-      // check passenger exist or not
-      const passengerExist = await prisma.passenger.findUnique({
-        where: {
-          id: req.body.passengerId
-        }
-      })
-
-      if (!passengerExist) {
-        return res.json({ message: "passenger doesn't exist", status: 404 })
-      }
-
-      const newProfile = await prisma.profile.create({
-        data: {
-          location: req.body.location,
-          bio: req.body.bio,
-          passengerId: req.body.passengerId,
-        }
-      })
-
-      console.log('newProfile :', newProfile)
-
-      return res.json({ message: "passenger profile successfully created", status: 201, passenger: newProfile })
+    if (!passengerHasProfile) {
+      return res.json({ message: "this passenger has not profile", profile: passengerHasProfile, status: 404 })
     }
 
-    if (req.body.driverId) {
-
-      // check driver has a profile or not
-      const driverHasProfile = await prisma.driver.findUnique({
-        where: {
-          id: req.body.driverId,
-          profile: {
-            driverId: req.body.driverId
-          }
-        }
-      });
-
-      if (driverHasProfile) {
-        return res.json({ message: "this driver has a profile", profile: driverHasProfile, status: 409 })
+    // check passenger exist or not
+    const passengerExist = await prisma.passenger.findUnique({
+      where: {
+        id: Number(passengerId)
       }
+    })
 
-      // check driver exist or not
-      const driverExist = await prisma.driver.findUnique({
-        where: {
-          id: req.body.driverId
-        }
-      })
-
-      if (!driverExist) {
-        return res.json({ message: "driver doesn't exist", status: 404 })
-      }
-
-
-      const newProfile = await prisma.profile.create({
-        data: {
-          location: req.body.location,
-          bio: req.body.bio,
-          driverId: req.body.driverId,
-        }
-      })
-
-      console.log('newProfile :', newProfile)
-
-      return res.json({ message: "driver profile successfully created", status: 201, driver: newProfile })
+    if (!passengerExist) {
+      return res.json({ message: "passenger doesn't exist", status: 404 })
     }
+
+    const newProfile = await prisma.profile.update({
+      data: {
+        ...req.body
+      }
+    })
+
+    console.log('newProfile :', newProfile)
+
+    return res.json({ message: "passenger profile successfully created", status: 201, passenger: newProfile })
 
   } catch (error) {
     return res.json({ error: 'server error', status: 500, error: error })
   }
 }
 
-module.exports = updateProfile
+const updateDriverProfile = async (req, res, next) => {
+  try {
+    const driverId = req.params.driverId;
+
+    // check driver has a profile or not
+    const driverHasProfile = await prisma.driver.findUnique({
+      where: {
+        id: Number(driverId),
+        profile: {
+          driverId: Number(driverId)
+        }
+      }
+    });
+
+    if (!driverHasProfile) {
+      return res.json({ message: "this driver has not profile", profile: driverHasProfile, status: 404 })
+    }
+
+    // check driver exist or not
+    const driverExist = await prisma.driver.findUnique({
+      where: {
+        id: Number(driverId)
+      }
+    })
+
+    if (!driverExist) {
+      return res.json({ message: "driver doesn't exist", status: 404 })
+    }
+
+
+    const newProfile = await prisma.profile.update({
+      data: {
+        ...req.body
+      }
+    })
+
+    console.log('newProfile :', newProfile)
+
+    return res.json({ message: "driver profile successfully created", status: 201, driver: newProfile })
+
+  } catch (error) {
+    return res.json({ error: 'server error', status: 500, error: error })
+  }
+}
+
+
+module.exports = { updatePassengerProfile, updateDriverProfile }
